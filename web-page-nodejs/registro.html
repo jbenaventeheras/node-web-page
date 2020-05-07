@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <title>regitrate</title>
+   <link rel="stylesheet" href="index.css">
+   <head>
+<script type="text/javascript">
+/*
+ * Genera una cookie y pasamos el valor desde el input msg
+ */
+function setCookie(cookieregistro, caducidad) {
+	//Al crar cookie ponemos fecha actual mas 10 días pasado desde llamada
+  //si llamamos a borrar pasa -1 y borra
+
+  var expireDate = new Date() // fecha hoy
+  nombreusuario = document.getElementById("msg").value
+	expireDate.setDate(expireDate.getDate()+caducidad);
+
+	document.cookie = cookieregistro + "=" + escape(nombreusuario) + "; expires=" + expireDate.toGMTString() + "; path=/";
+}
+/*
+ * Leer la cookie le pasamos el nombre de la cookie
+ */
+function getCookie(cookieregistro){
+	/*
+	 * document.cookie -->contiene las cookies
+	 * document.cookie.length -->longuitud de la cooki
+	 */
+	if(document.cookie.length>0)
+	{
+		/*
+		 * indexOf(car,desd)->primera posicion caracter y -1 si no lo encuentra
+		 */
+		comienzo=document.cookie.indexOf(cookieregistro + "=");
+    //lee cooki desde comienzo: =, hasta final: ;
+		if (comienzo!=-1)
+		{
+
+			comienzo=comienzo + cookieregistro.length+1;
+
+			final=document.cookie.indexOf(";",comienzo);
+
+			if (final==-1)
+				final=document.cookie.length;
+
+			return unescape(document.cookie.substring(comienzo,final));
+		}
+	}
+	//si no encuentra devuelve vacio
+	return "";
+}
+</script>
+</head>
+ </head>
+ <div align=center>
+ <body>
+   ---------------  Registrate ---------------</p>
+    <img src="images/join.jpg"  width="280px" height="400px" HSPACE=5 VSPACE=3>
+    <br /><input id="msg" autocomplete="off" >
+    <br /><a href="javascript:setCookie('cookie-registro',10);">registrarse</a>
+    	<br /><a href="javascript:window.alert(getCookie('cookie-registro'));">recordar usuario</a>
+    	<br /><a href="javascript:setCookie('cookie-registro','',-1);">borrar usuario</a>
+ </body>
+ </div>
+</html>
