@@ -10,7 +10,7 @@ var express = require('express')
 //-- Configurar el servidor
 http.createServer((req, res) => {
 
-  console.log("---------- PETICION RECIBIDA --------------")
+  console.log("---------- PETICION RECIBIDA -----------------")
   let q = url.parse(req.url, true);
   console.log("Recurso solicitado (URL): " + req.url)
   console.log("Host: " + q.host)
